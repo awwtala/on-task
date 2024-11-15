@@ -1,7 +1,7 @@
 // handlebars
 const User = require("./User");
 const Project = require("./Project");
-const Task = require("./Tasks");
+const Task = require("./Task");
 
 User.hasMany(Project, {
   foreignKey: "user_id",
