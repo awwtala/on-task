@@ -20,6 +20,30 @@ const newFormHandler = async (event) => {
       }
     }
   };
+
+const newTaskHandler = async (event) => {
+    event.preventDefault();
+  
+    const taskName = document.querySelector('#task-name').value.trim();
+    const taskDescription = document.querySelector('#task-desc').value.trim();
+  
+    if (taskName && taskDescription) {
+      const response = await fetch(`/api/tasks`, {
+        method: 'POST',
+        body: JSON.stringify({ taskName, taskDescription }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.ok) {
+        console.log('ok')
+    //     document.location.replace('/project');
+      } else {
+        alert('Failed to create task');
+      }
+    }
+  };
   
   const delButtonHandler = async (event) => {
     if (event.target.hasAttribute('data-id')) {
