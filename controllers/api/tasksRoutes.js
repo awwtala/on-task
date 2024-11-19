@@ -1,1 +1,83 @@
-// Creating and updating tasks
+// CRUD TASK PAGE
+
+const router = require("express").Router();
+const { Task } = require("../../models/Task");
+const withAuth = require("../../utils/auth");
+
+// Get All Task
+router.get("/", async (req, res) => {
+  try {
+    // Get all projects and JOIN with user data
+    const taskData = await Task.findAll();
+
+    // Serialize data so the template can read it
+    const tasks = taskData.map((task) => task.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
+    res.render("homepage", {
+      tasks,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Get Task by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const task = await Task.findOne({
+      where: {
+        id: req.params.id,
+        user_id: req.session.user_id,
+      },
+    });
+    if (!task) {
+      res.status(404).json({ message: "No task found with this id!" });
+      return;
+    }
+    res.render("dashboard", {
+      ...task,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//Create new task
+router.post("/", withAuth, async (req, res) => {
+  try {
+    const newTask = await Task.create({
+      ...req.body,
+      user_id: req.session.user_id,
+    });
+
+    res.status(200).json(newTask);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Delete Task
+router.delete("/:id", withAuth, async (req, res) => {
+  try {
+    const task = await Task.destroy({
+      where: {
+        id: req.params.id,
+        user_id: req.session.user_id,
+      },
+    });
+
+    if (!taskData) {
+      res.status(404).json({ message: "No tasks found with this id!" });
+      return;
+    }
+
+    res.status(200).json(taskData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+module.exports = router;
