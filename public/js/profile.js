@@ -73,6 +73,7 @@ function handleAddTask(event) {
     name: name,
     description: description,
   };
+  //add fetch here
   window.location.reload(); // fixed the add task function.
 }
 $(document).ready(function () {
@@ -80,12 +81,12 @@ $(document).ready(function () {
   taskButtonEl.addEventListener("click", handleAddTask);
 });
 
-// document
-//   .querySelector(".new-project-form")
-//   .addEventListener("submit", newFormHandler);
+document
+  .querySelector(".new-project-form")
+  .addEventListener("submit", newFormHandler);
 
-// document
-//   .querySelector(".project-list")
-//   .addEventListener("click", delButtonHandler);
+document
+  .querySelector(".project-list")
+  .addEventListener("click", delButtonHandler);
 
 document.querySelector("#addTask").addEventListener("click", newTaskHandler);
