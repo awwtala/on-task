@@ -6,5 +6,79 @@
     <button id="addTask" class="btn btn-primary">Add Task</button>
   </p>
 </div>
+<!-- Todo: Create a modal with a form to add tasks -->
+<div
+  class="modal fade"
+  id="formModal"
+  tabindex="-1"
+  aria-labelledby="formModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="formModalLabel">Add New Task</h5>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="taskForm">
+          <div class="form-group">
+            <label for="name">Task Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Enter task name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="taskDate">Task Date</label>
+            <input
+              type="text"
+              class="form-control"
+              id="taskDate"
+              placeholder="Task date"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="description"> Task Description</label>
+            <textarea
+              class="form-control"
+              id="description"
+              rows="3"
+              placeholder="Enter task description"
+              required
+            ></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Close</button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          id="taskbutton"
+          form="taskForm"
+        >Add Task</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal ends here-->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
 
 <script src="/js/profile.js"></script>

@@ -63,6 +63,22 @@ const delButtonHandler = async (event) => {
     }
   }
 };
+function handleAddTask(event) {
+  //what activates the task
+  console.log(event); //object that contains info
+  event.preventDefault();
+  const name = $("#name").val(); //variable
+  const description = $("#description").val(); //variables
+  const task = {
+    name: name,
+    description: description,
+  };
+  window.location.reload(); // fixed the add task function.
+}
+$(document).ready(function () {
+  const taskButtonEl = document.getElementById("taskbutton");
+  taskButtonEl.addEventListener("click", handleAddTask);
+});
 
 // document
 //   .querySelector(".new-project-form")
