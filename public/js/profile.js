@@ -73,6 +73,7 @@ function handleAddTask(event) {
     name: name,
     description: description,
   };
+  //add fetch here
   window.location.reload(); // fixed the add task function.
 }
 $(document).ready(function () {
