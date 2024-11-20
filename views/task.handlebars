@@ -1,0 +1,16 @@
+<script id="task-form-template" type="text/x-handlebars-template">
+  <form id="taskForm">
+    <label for="taskTitle">Title:</label>
+    <input type="text" id="taskTitle" class="cardTitle" value="{{task.name}}" /> <br />
+
+    <label for="taskDescription">Description:</label>
+    <input type="text" id="taskDescription" class="cardDes" value="{{task.description}}" /> <br /><br />
+
+    {{!-- <label for="taskDueDate">Due Date:</label>
+    <input type="date" id="taskDueDate" class="cardDate" value="{{taskDueDate}}" /> <br /><br /> --}}
+
+    <button type="submit" id="submit" class="close" data-bs-dismiss="modal">
+      Save Task
+    </button>
+  </form>
+</script>

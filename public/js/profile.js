@@ -38,7 +38,7 @@ const newTaskHandler = async (event) => {
   
       if (response.ok) {
         console.log('ok')
-    //     document.location.replace('/project');
+        document.location.replace('/project/id');
       } else {
         alert('Failed to create task');
       }
