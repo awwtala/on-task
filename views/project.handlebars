@@ -17,21 +17,21 @@
 
           <form class="new-task-form row g-3">
             <div class="col-md-6">
-              <label for="title" class="form-label">Title</label>
-              <input type="title" class="form-control" id="title">
+              <label for="task-title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="task-title">
             </div>
-            <div class="col-md-6">
-              <label for="taskDue" class="form-label">Task Due Date</label>
-              <input type="text" class="form-control" id="taskDue">
-            </div>
+            {{!-- <div class="col-md-6">
+              <label for="task-due" class="form-label">Task Due Date</label>
+              <input type="text" class="form-control" id="task-due">
+            </div> --}}
             <div class="col-12">
-              <label for="descriptiom" class="form-label">Task Description</label>
-              <input type="text" class="form-control" id="description">
+              <label for="description" class="form-label">Task Description</label>
+              <input type="text" class="form-control" id="task-description">
+            </div>
+            <div class="add-task">
+            <button type="submit" class="btn btn-primary" id="add-task">Add Task</button>
             </div>
           </form>
-          <div class="add-task">
-          <button type="button" class="btn btn-primary" id="add-task">Add Task</button>
-          </div>
         </div>
       </div>
     </div>
@@ -69,6 +69,6 @@
       </div>
     </div>
   </div>
-</body>
+</div>
 
-</html>
+<script src="/js/addTask.js"></script>
