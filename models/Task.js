@@ -6,6 +6,7 @@ class Task extends Model {}
 
 Task.init(
   {
+    // add status property: to do, in progress, done // pass strings
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,

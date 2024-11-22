@@ -1,9 +1,9 @@
+const id = window.location.toString().split("/")[
+  window.location.toString().split("/").length - 1
+];
+
 const newTaskHandler = async (event) => {
   event.preventDefault();
-
-  const id = window.location.toString().split("/")[
-    window.location.toString().split("/").length - 1
-  ];
 
   const taskName = document.querySelector("#task-title").value.trim();
   const taskDescription = document
@@ -29,6 +29,9 @@ const newTaskHandler = async (event) => {
 };
 
 document.querySelector("#add-task").addEventListener("click", newTaskHandler);
+
+// js function pull task from db using api route not a handlebar, js function render cards || js function pull task from routes (handlebars render) (requires page to reload)
+// make an api endpoint that returns an array of task
 
 // function createTaskCard(task) {
 //     const taskCard = $('<div>');
@@ -67,9 +70,9 @@ document.querySelector("#add-task").addEventListener("click", newTaskHandler);
 //     const taskList = getTasks();
 
 //     // if (taskName && taskDescription) {
-//     //     const response = await fetch(`/api/tasks`, {
-//     //       method: 'POST',
-//     //       body: JSON.stringify({ taskName, taskDescription }),
+// need new route for this ---- c
+//     //     const response = await fetch(`/api/tasks/getall/${id}`, {
+//     //       method: 'GET',
 //     //       headers: {
 //     //         'Content-Type': 'application/json',
 //     //       },
@@ -84,6 +87,7 @@ document.querySelector("#add-task").addEventListener("click", newTaskHandler);
 //     const doneList = $('#done-cards');
 //     doneList.empty();
 
+// ******* make sure match those strings ******* to-do, in-progress, done
 //     for (let task of taskList) {
 //         if (task.status === 'to-do') {
 //           todoList.append(createTaskCard(task));
