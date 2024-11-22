@@ -1,7 +1,7 @@
 // CRUD TASK PAGE
 
 const router = require("express").Router();
-const { Task }  = require("../../models/index");
+const { Task } = require("../../models/index");
 const withAuth = require("../../utils/auth");
 
 // Get All Task
@@ -47,6 +47,7 @@ router.get("/:id", async (req, res) => {
 
 //Create new task
 router.post("/", withAuth, async (req, res) => {
+  console.log("test");
   try {
     const newTask = await Task.create({
       ...req.body,

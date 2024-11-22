@@ -1,30 +1,34 @@
 const newTaskHandler = async (event) => {
   event.preventDefault();
-  console.log("testing");
+
+  const id = window.location.toString().split("/")[
+    window.location.toString().split("/").length - 1
+  ];
 
   const taskName = document.querySelector("#task-title").value.trim();
-  const taskDescription = document.querySelector("#task-description").value.trim();
-
+  const taskDescription = document
+    .querySelector("#task-description")
+    .value.trim();
+  console.log(taskName);
+  console.log(taskDescription);
   if (taskName && taskDescription) {
-    const response = await fetch(`/api/tasks`, {
+    const response = await fetch("/api/tasks", {
       method: "POST",
-      body: JSON.stringify({ name:taskName, description:taskDescription }),
+      body: JSON.stringify({ name: taskName, description: taskDescription }),
       headers: {
         "Content-Type": "application/json",
       },
     });
-
+    console.log(response);
     if (response.ok) {
-      document.location.replace("/project/${id}");
+      document.location.replace(`/project/${id}`);
     } else {
       alert("Failed to create task");
     }
   }
 };
 
-document
-  .querySelector(".new-task-form")
-  .addEventListener("submit", newTaskHandler);
+document.querySelector("#add-task").addEventListener("click", newTaskHandler);
 
 // function createTaskCard(task) {
 //     const taskCard = $('<div>');
