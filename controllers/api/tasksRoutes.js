@@ -1,5 +1,6 @@
 // CRUD TASK PAGE
 
+// need put route to update task status and ?post route to done status ?
 const router = require("express").Router();
 const { Task } = require("../../models/index");
 const withAuth = require("../../utils/auth");
@@ -43,6 +44,13 @@ router.get("/:id", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+});
+
+router.get("/getall/:id", withAuth, async (req, res) => {
+  const data = await Task.findAll({
+    where: { project_id: req.params.id },
+  });
+  res.status(200).json(data);
 });
 
 //Create new task
