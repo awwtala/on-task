@@ -2,73 +2,73 @@
   <h2>{{name}}</h2>
   <p>{{description}}</p>
   <p>Created by {{user.name}} on {{format_date date_created}}</p>
-  <p>
-    <button id="addTask" class="btn btn-primary">Add Task</button>
-  </p>
-</div>
-<!-- Todo: Create a modal with a form to add tasks -->
-<div
-  class="modal fade"
-  id="formModal"
-  tabindex="-1"
-  aria-labelledby="formModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="formModalLabel">Add New Task</h5>
-        <button
-          type="button"
-          class="close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        >
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form id="taskForm">
-          <div class="form-group">
-            <label for="name">Task Name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="name"
-              placeholder="Enter task name"
-              required
-            />
+  <div class="container">
+    <div class="text-center mb-5">
+      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add New Task</button>
+    </div>
+
+    <div class="modal" id="formModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Task</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="form-group">
-            <label for="description"> Task Description</label>
-            <textarea
-              class="form-control"
-              id="description"
-              rows="3"
-              placeholder="Enter task description"
-              required
-            ></textarea>
+
+          <form class="new-task-form row g-3">
+            <div class="col-md-6">
+              <label for="title" class="form-label">Title</label>
+              <input type="title" class="form-control" id="title">
+            </div>
+            <div class="col-md-6">
+              <label for="taskDue" class="form-label">Task Due Date</label>
+              <input type="text" class="form-control" id="taskDue">
+            </div>
+            <div class="col-12">
+              <label for="descriptiom" class="form-label">Task Description</label>
+              <input type="text" class="form-control" id="description">
+            </div>
+          </form>
+          <div class="add-task">
+          <button type="button" class="btn btn-primary" id="add-task">Add Task</button>
           </div>
-        </form>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >Close</button>
-        <button
-          type="submit"
-          class="btn btn-primary"
-          id="taskbutton"
-          form="taskForm"
-        >Add Task</button>
+    </div>
+    </div>
+    <div class="row swim-lanes text-center justify-content-between">
+      <div class="col-12 col-lg-4 d-flex">
+        <div id="to-do" class="card border-light mb-3 lane flex-grow-1">
+          <div class="card-header bg-white">
+            <h2 class="card-title mb-1">To Do</h2>
+          </div>
+          <div class="card-body bg-light">
+            <div id="todo-cards"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 d-flex">
+        <div id="in-progress" class="card border-light mb-3 lane flex-grow-1">
+          <div class="card-header bg-white">
+            <h2 class="card-title mb-1">In Progress</h2>
+          </div>
+          <div class="card-body bg-light">
+            <div id="in-progress-cards"></div>
+          </div>
+        </div>
+        </div>
+        <div class="col-12 col-lg-4 d-flex">
+          <div id="done" class="card border-light mb-3 lane flex-grow-1">
+            <div class="card-header bg-white">
+              <h2 class="card-title mb-1">Done</h2>
+            </div>
+            <div class="card-body bg-light">
+              <div id="done-cards"></div>
+          </div>
+          </div>
       </div>
     </div>
   </div>
-</div>
-<!--Modal ends here-->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+</body>
 
-<script src="/js/profile.js"></script>
+</html>

@@ -1,7 +1,7 @@
 // CRUD TASK PAGE
 
 const router = require("express").Router();
-const { Task } = require("../../models/Task");
+const { Task }  = require("../../models/index");
 const withAuth = require("../../utils/auth");
 
 // Get All Task
@@ -55,6 +55,7 @@ router.post("/", withAuth, async (req, res) => {
 
     res.status(200).json(newTask);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
