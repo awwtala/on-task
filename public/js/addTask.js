@@ -14,7 +14,7 @@ const newTaskHandler = async (event) => {
   if (taskName && taskDescription) {
     const response = await fetch("/api/tasks", {
       method: "POST",
-      body: JSON.stringify({ name: taskName, description: taskDescription }),
+      body: JSON.stringify({ name: taskName, description: taskDescription, status: "to-do", project_id: id }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -33,37 +33,37 @@ document.querySelector("#add-task").addEventListener("click", newTaskHandler);
 // js function pull task from db using api route not a handlebar, js function render cards || js function pull task from routes (handlebars render) (requires page to reload)
 // make an api endpoint that returns an array of task
 
-// function createTaskCard(task) {
-//     const taskCard = $('<div>');
-//     taskCard.addClass('card task-card draggable my-3')
-//     .attr('data-task-id', task.id);
-// const cardBody = $('<div>').addClass('card-body');
-// const title = $('<div>').addClass('card-header h4').text(task.title);
-// const description = $('<p>').addClass('card-description').text(task.description);
-// const taskDue = $('<p>').addClass('card-text').text(task.taskDue);
-// const cardDelete = $('<button>');
-// cardDelete
-//     .addClass('btn btn-danger delete')
-//     .text('Delete')
-//     .attr('data-task-id', task.id);
+function createTaskCard(task) {
+    const taskCard = $('<div>');
+    taskCard.addClass('card task-card draggable my-3')
+    .attr('data-task-id', task.id);
+const cardBody = $('<div>').addClass('card-body');
+const title = $('<div>').addClass('card-header h4').text(task.title);
+const description = $('<p>').addClass('card-description').text(task.description);
+const taskDue = $('<p>').addClass('card-text').text(task.taskDue);
+const cardDelete = $('<button>');
+cardDelete
+    .addClass('btn btn-danger delete')
+    .text('Delete')
+    .attr('data-task-id', task.id);
 
-// if (task.taskDue && task.taskStatus !== 'done') {
-//     const now = dayjs();
-//     const taskDueDate = dayjs(task.taskDue, 'YYYY-MM-DD');
+if (task.taskDue && task.taskStatus !== 'done') {
+    const now = dayjs();
+    const taskDueDate = dayjs(task.taskDue, 'YYYY-MM-DD');
 
-//     if (now.isSame(taskDueDate, 'day')) {
-//     taskCard.addClass('bg-warning text-white');
-//     } else if (now.isAfter(taskDueDate)) {
-//       taskCard.addClass('bg-danger text-white');
-//       cardDelete.addClass('border-light');
-//     }
-// }
+    if (now.isSame(taskDueDate, 'day')) {
+    taskCard.addClass('bg-warning text-white');
+    } else if (now.isAfter(taskDueDate)) {
+      taskCard.addClass('bg-danger text-white');
+      cardDelete.addClass('border-light');
+    }
+}
 
-// cardBody.append(description, taskDue, cardDelete);
-// taskCard.append(title, cardBody);
+cardBody.append(description, taskDue, cardDelete);
+taskCard.append(title, cardBody);
 
-// return taskCard;
-// }
+return taskCard;
+}
 
 // function renderTaskList() {
 //     // re-write this
