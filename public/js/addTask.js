@@ -30,35 +30,22 @@ const newTaskHandler = async (event) => {
 document.querySelector("#add-task").addEventListener("click", newTaskHandler);
 
 async function getTasks(id) {
-  console.log(id);
-  const response = await fetch(`api/tasks/getall/${id}`, {
+  const response = await fetch(`/api/tasks/getall/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
     }
   });
+  console.log(response);
   if (response.ok) {
     console.log( 'retrieving tasks...');
-    return response;
+    return await response.json();
   } else {
     alert("Failed to retreive tasks");
   }
 };
 
-async function saveTasks() {
-  const response = await fetch("api/tasks", {
-    method: "PUT",
-    body: JSON.stringify({ name: taskName, description: taskDescription, status: status, project_id: id  }),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
-  if (response.ok) {
-    document.location.replace(`/project/${id}`);
-  } else {
-    alert("Failed to save task");
-  }
-};
+
 
 function createTaskCard(task) {
     const taskCard = $('<div>');
@@ -92,8 +79,9 @@ taskCard.append(title, cardBody);
 return taskCard;
 }
 
-function renderTaskList() {
-    const taskList = getTasks(id);
+async function renderTaskList() {
+    const taskList = await getTasks(id);
+    console.log(taskList);
 
     const todoList = $('#todo-cards');
     todoList.empty();
@@ -128,20 +116,36 @@ function renderTaskList() {
     });
 }
 
-// function handleDrop(event, ui) {
-//     const taskList = getTasks();
-//     const taskId = ui.draggable[0].dataset.taskId;
-//     const currentStatus = event.target.id;
+async function saveTask(id, status) {
+  const response = await fetch(`/api/tasks/${id}`, {
+    method: "PUT",
+    body: JSON.stringify({ status }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+  if (response.ok) {
+    document.location.replace(`/project/${id}`);
+  } else {
+    alert("Failed to save task");
+  }
+};
 
-//     for (let toDo of taskList) {
-//         if (toDo.id == taskId) {
-//             toDo.status = currentStatus;
-//         }
-//     }
 
-//     saveTask(taskList);
-//     renderTaskList();
-// };
+async function handleDrop(event, ui) {
+    const taskList = await getTasks(id);
+    const taskId = ui.draggable[0].dataset.taskId;
+    const currentStatus = event.target.id;
+
+    for (let toDo of taskList) {
+        if (toDo.id == taskId) {
+            toDo.status = currentStatus;
+        }
+    }
+
+    saveTask(taskId, currentStatus);
+    renderTaskList();
+};
 
 $(document).ready(function () {
     renderTaskList();
@@ -156,4 +160,5 @@ $(document).ready(function () {
     //     changeYear: true,
     // });
 });
+
 
