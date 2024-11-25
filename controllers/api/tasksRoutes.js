@@ -37,7 +37,7 @@ router.get("/:id", async (req, res) => {
       res.status(404).json({ message: "No task found with this id!" });
       return;
     }
-    res.render("dashboard", {
+    res.render("project", {
       ...task,
       logged_in: req.session.logged_in,
     });
@@ -68,6 +68,24 @@ router.post("/", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.put("/:id", withAuth, async (req,res) => {
+  Task.update({ status: req.body.status },
+    {
+      where: {
+        id: req.params.id
+      }
+    }).then(taskData => {
+      if (taskData) {
+        res.status(404).json({ message: 'No task found with this id!' });
+        return;
+      }
+      res.json(taskData);
+    }).catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+  });
 
 // Delete Task
 router.delete("/:id", withAuth, async (req, res) => {
