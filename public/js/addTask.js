@@ -19,7 +19,6 @@ const newTaskHandler = async (event) => {
         "Content-Type": "application/json",
       },
     });
-    console.log(response);
     if (response.ok) {
       document.location.replace(`/project/${id}`);
     } else {
@@ -30,8 +29,36 @@ const newTaskHandler = async (event) => {
 
 document.querySelector("#add-task").addEventListener("click", newTaskHandler);
 
-// js function pull task from db using api route not a handlebar, js function render cards || js function pull task from routes (handlebars render) (requires page to reload)
-// make an api endpoint that returns an array of task
+async function getTasks(id) {
+  console.log(id);
+  const response = await fetch(`api/tasks/getall/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+  if (response.ok) {
+    console.log( 'retrieving tasks...');
+    return response;
+  } else {
+    alert("Failed to retreive tasks");
+  }
+};
+
+async function saveTasks() {
+  const response = await fetch("api/tasks", {
+    method: "PUT",
+    body: JSON.stringify({ name: taskName, description: taskDescription, status: status, project_id: id  }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+  if (response.ok) {
+    document.location.replace(`/project/${id}`);
+  } else {
+    alert("Failed to save task");
+  }
+};
 
 function createTaskCard(task) {
     const taskCard = $('<div>');
@@ -40,77 +67,66 @@ function createTaskCard(task) {
 const cardBody = $('<div>').addClass('card-body');
 const title = $('<div>').addClass('card-header h4').text(task.title);
 const description = $('<p>').addClass('card-description').text(task.description);
-const taskDue = $('<p>').addClass('card-text').text(task.taskDue);
+//const taskDue = $('<p>').addClass('card-text').text(task.taskDue);
 const cardDelete = $('<button>');
 cardDelete
     .addClass('btn btn-danger delete')
     .text('Delete')
     .attr('data-task-id', task.id);
 
-if (task.taskDue && task.taskStatus !== 'done') {
-    const now = dayjs();
-    const taskDueDate = dayjs(task.taskDue, 'YYYY-MM-DD');
+// if (task.taskDue && task.taskStatus !== 'done') {
+//     const now = dayjs();
+//     const taskDueDate = dayjs(task.taskDue, 'YYYY-MM-DD');
 
-    if (now.isSame(taskDueDate, 'day')) {
-    taskCard.addClass('bg-warning text-white');
-    } else if (now.isAfter(taskDueDate)) {
-      taskCard.addClass('bg-danger text-white');
-      cardDelete.addClass('border-light');
-    }
-}
+    // if (now.isSame(taskDueDate, 'day')) {
+    // taskCard.addClass('bg-warning text-white');
+    // } else if (now.isAfter(taskDueDate)) {
+    //   taskCard.addClass('bg-danger text-white');
+    //   cardDelete.addClass('border-light');
+    // }
+//}
 
-cardBody.append(description, taskDue, cardDelete);
+cardBody.append(description, cardDelete);
 taskCard.append(title, cardBody);
 
 return taskCard;
 }
 
-// function renderTaskList() {
-//     // re-write this
-//     const taskList = getTasks();
+function renderTaskList() {
+    const taskList = getTasks(id);
 
-//     // if (taskName && taskDescription) {
-// need new route for this ---- c
-//     //     const response = await fetch(`/api/tasks/getall/${id}`, {
-//     //       method: 'GET',
-//     //       headers: {
-//     //         'Content-Type': 'application/json',
-//     //       },
-//     //     });
+    const todoList = $('#todo-cards');
+    todoList.empty();
 
-//     const todoList = $('#todo-cards');
-//     todoList.empty();
+    const inProgressList = $('#in-progress-cards');
+    inProgressList.empty();
 
-//     const inProgressList = $('#in-progress-cards');
-//     inProgressList.empty();
+    const doneList = $('#done-cards');
+    doneList.empty();
 
-//     const doneList = $('#done-cards');
-//     doneList.empty();
+    for (let task of taskList) {
+        if (task.status === 'to-do') {
+          todoList.append(createTaskCard(task));
+        } else if (task.status === 'in-progress') {
+          inProgressList.append(createTaskCard(task));
+        } else if (task.status === 'done') {
+          doneList.append(createTaskCard(task));
+        }
+    };
 
-// ******* make sure match those strings ******* to-do, in-progress, done
-//     for (let task of taskList) {
-//         if (task.status === 'to-do') {
-//           todoList.append(createTaskCard(task));
-//         } else if (task.status === 'in-progress') {
-//           inProgressList.append(createTaskCard(task));
-//         } else if (task.status === 'done') {
-//           doneList.append(createTaskCard(task));
-//         }
-//     };
-
-//     $('.draggable').draggable({
-//         opacity: 0.5,
-//         zIndex: 100,
-//         helper: function (e) {
-//             const original = $(e.target).hasClass('ui-draggable')
-//                 ? $(e.target)
-//                 : $(e.target).closest('.ui-draggable');
-//             return original.clone().css({
-//                 width: original.outerWidth(),
-//             });
-//         },
-//     });
-// }
+    $('.draggable').draggable({
+        opacity: 0.5,
+        zIndex: 100,
+        helper: function (e) {
+            const original = $(e.target).hasClass('ui-draggable')
+                ? $(e.target)
+                : $(e.target).closest('.ui-draggable');
+            return original.clone().css({
+                width: original.outerWidth(),
+            });
+        },
+    });
+}
 
 // function handleDrop(event, ui) {
 //     const taskList = getTasks();
@@ -127,20 +143,17 @@ return taskCard;
 //     renderTaskList();
 // };
 
-// $(document).ready(function () {
-//     renderTaskList();
+$(document).ready(function () {
+    renderTaskList();
 
-//     $('.lane').droppable({
-//         accept: '.draggable',
-//         drop: handleDrop,
-//     });
+    $('.lane').droppable({
+        accept: '.draggable',
+        drop: handleDrop,
+    });
 
-//     $('#taskDue').datepicker({
-//         changeMonth: true,
-//         changeYear: true,
-//     });
-// });
+    // $('#taskDue').datepicker({
+    //     changeMonth: true,
+    //     changeYear: true,
+    // });
+});
 
-// taskForm.on('click', '#add-task', function(event){event.preventDefault()
-//     taskForm.modal("hide");
-// });
