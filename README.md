@@ -81,7 +81,7 @@ No automated tests were conducted for this project.
 
 # Contributing
 
-This application was developed as part of a collaborative group project:
+This application was developed as part of a collaborative group project: \
 • Dawson Dohlen \
  • Dory Celestin \
  • Kun Wansom \
