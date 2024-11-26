@@ -69,23 +69,29 @@ router.post("/", withAuth, async (req, res) => {
   }
 });
 
-router.put("/:id", withAuth, async (req,res) => {
-  Task.update({ status: req.body.status },
+router.put("/:id", withAuth, async (req, res) => {
+  console.log(req.params);
+  Task.update(
+    { status: req.body.status },
     {
       where: {
-        id: req.params.id
-      }
-    }).then(taskData => {
-      if (taskData) {
-        res.status(404).json({ message: 'No task found with this id!' });
+        id: req.params.id,
+      },
+    }
+  )
+    .then((taskData) => {
+      console.log(taskData);
+      if (!taskData) {
+        res.status(404).json({ message: "No task found with this id!" });
         return;
       }
       res.json(taskData);
-    }).catch(err => {
+    })
+    .catch((err) => {
       console.log(err);
       res.status(500).json(err);
     });
-  });
+});
 
 // Delete Task
 router.delete("/:id", withAuth, async (req, res) => {
