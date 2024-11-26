@@ -92,7 +92,7 @@ Supported by:
 • Teaching Assistant: Zac Warner
 • Learning Platform: Xpert Learning Assistant
 
-License
+# License
 
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
