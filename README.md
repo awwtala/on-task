@@ -23,7 +23,8 @@ The goal of On-Task is to provide a simple and private platform for individuals 
 
 # Installation
 
-To set up and run On-Task on your local machine: 1. Clone the repository to your local computer using SSH or HTTPS: git clone <repository-url> \
+To set up and run On-Task on your local machine: \
+1. Clone the repository to your local computer using SSH or HTTPS: git clone <repository-url> \
  2. Navigate to the project folder and install the necessary dependencies: npm install \
  3. Ensure that you have PostgreSQL installed and running on your system. \
  4. Install the following npm packages via terminal if they are not included in your dependencies: \
