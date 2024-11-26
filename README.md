@@ -34,7 +34,7 @@ To set up and run On-Task on your local machine:
  • Pg (PostgresSQL): 8.11.3 \
  • Sequelize: 6.3.5
 
-Usage
+# Usage
 
     1.	Open your terminal and navigate to the project folder.
     2.	Run the following commands step by step:
@@ -66,7 +66,7 @@ Usage
 
 ---
 
-Questions
+# Questions
 
 If you have any questions about the project or would like to contribute, feel free to reach out to the team via email:
 
@@ -75,11 +75,11 @@ If you have any questions about the project or would like to contribute, feel fr
     •	Kun Wansom: wansom.kun@gmail.com
     •	Tala Awwad: awwad.tala1@yahoo.com
 
-Tests
+# Tests
 
 No automated tests were conducted for this project.
 
-Contributing
+# Contributing
 
 This application was developed as part of a collaborative group project:
 • Dawson Dohlen \
