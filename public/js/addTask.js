@@ -56,14 +56,14 @@ function createTaskCard(task) {
     .addClass("card task-card draggable my-3")
     .attr("data-task-id", task.id);
   const cardBody = $("<div>").addClass("card-body");
-  const title = $("<div>").addClass("card-header h4").text(task.title);
+  const title = $("<div>").addClass("card-header h4").text(task.name);
   const description = $("<p>")
     .addClass("card-description")
     .text(task.description);
   //const taskDue = $('<p>').addClass('card-text').text(task.taskDue);
   const cardDelete = $("<button>");
   cardDelete
-    .addClass("btn btn-danger delete")
+    .addClass("delete-task-btn btn btn-danger delete")
     .text("Delete")
     .attr("data-task-id", task.id);
 
@@ -122,7 +122,7 @@ async function renderTaskList() {
   });
 }
 
-// update status
+// Update status
 async function saveTask(id, status) {
   const response = await fetch(`/api/tasks/${id}`, {
     method: "PUT",
