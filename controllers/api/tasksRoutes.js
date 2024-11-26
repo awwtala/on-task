@@ -103,13 +103,14 @@ router.delete("/:id", withAuth, async (req, res) => {
       },
     });
 
-    if (!taskData) {
+    if (!task) {
       res.status(404).json({ message: "No tasks found with this id!" });
       return;
     }
 
-    res.status(200).json(taskData);
+    res.status(200).json(task);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });

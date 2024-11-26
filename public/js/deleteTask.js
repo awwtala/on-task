@@ -1,7 +1,7 @@
 async function deleteTaskHandler(event) {
   //   event.preventDefault();
   console.log(event);
-  const id = event.getAttribute("data-id");
+  const id = event.("data-id");
 
   const response = await fetch(`/api/tasks/${id}`, {
     method: "DELETE",
@@ -12,14 +12,8 @@ async function deleteTaskHandler(event) {
       "Content-Type": "application/json",
     },
   });
-
-//   if (response.ok) {
-//     document.location.replace("/");
-//   } else {
-//     alert(response.statusText);
-//   }
 }
 
 document
   .querySelector(".delete-task-btn")
-  .addEventListener("click", deleteFormHandler);
+  .addEventListener("click", deleteTaskHandler);

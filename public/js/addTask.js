@@ -49,7 +49,24 @@ async function getTasks(id) {
     alert("Failed to retreive tasks");
   }
 }
+async function deleteTaskHandler(event) {
+  //   event.preventDefault();
+  console.log(event);
+  const id = $(this).attr("data-task-id");
 
+  const response = await fetch(`/api/tasks/${id}`, {
+    method: "DELETE",
+    body: JSON.stringify({
+      id: id,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (response) {
+    renderTaskList();
+  }
+}
 function createTaskCard(task) {
   const taskCard = $("<div>");
   taskCard
@@ -66,7 +83,7 @@ function createTaskCard(task) {
     .addClass("delete-task-btn btn btn-danger delete")
     .text("Delete")
     .attr("data-task-id", task.id);
-
+  cardDelete.on("click", deleteTaskHandler);
   // if (task.taskDue && task.taskStatus !== 'done') {
   //     const now = dayjs();
   //     const taskDueDate = dayjs(task.taskDue, 'YYYY-MM-DD');
