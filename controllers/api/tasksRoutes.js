@@ -55,7 +55,6 @@ router.get("/getall/:id", withAuth, async (req, res) => {
 
 //Create new task
 router.post("/", withAuth, async (req, res) => {
-  console.log("test");
   try {
     const newTask = await Task.create({
       ...req.body,
@@ -76,6 +75,7 @@ router.put("/:id", withAuth, async (req, res) => {
     {
       where: {
         id: req.params.id,
+<<<<<<< HEAD
       },
     }
   )
@@ -83,6 +83,13 @@ router.put("/:id", withAuth, async (req, res) => {
       console.log(taskData);
       if (!taskData) {
         res.status(404).json({ message: "No task found with this id!" });
+=======
+        user_id: req.session.user_id,
+      }
+    }).then(taskData => {
+      if (taskData) {
+        res.status(404).json({ message: 'No task found with this id!' });
+>>>>>>> 23693f2 (more add task debugging)
         return;
       }
       res.json(taskData);

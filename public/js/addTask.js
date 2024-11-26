@@ -126,7 +126,7 @@ async function renderTaskList() {
 async function saveTask(id, status) {
   const response = await fetch(`/api/tasks/${id}`, {
     method: "PUT",
-    body: JSON.stringify({ status }),
+    body: JSON.stringify({ project_id: id, status }),
     headers: {
       "Content-Type": "application/json",
     },
