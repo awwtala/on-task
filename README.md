@@ -37,9 +37,7 @@ Usage
 
     1.	Open your terminal and navigate to the project folder.
     2.	Run the following commands step by step:
-    •	Initialize the project and create the package.json file:
-
-npm init
+    Initialize the project and create the package.json file: npm init
 
     •	Access PostgreSQL: psql -U postgres
 
