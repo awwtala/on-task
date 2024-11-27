@@ -5,26 +5,36 @@
     <img class="mx-auto h-1 w-auto" src="/images/on-task-logo.png" alt="On Task">
     <h2 class="mt-10 text-2xl/9 font-bold tracking-tight text-gray-900">Signup</h2>
   </div>
-  <div>
-    <form class="form signup-form">
+
+  <div class="form-group mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form class="form signup-form space-y-6">
       <div class="form-group">
-        <label for="name-signup">name:</label>
-        <input class="form-input" type="text" id="name-signup" />
+        <label for="name-signup" class="block text-sm/6 font-medium text-gray-900">Name</label>
+        <div class="mt-2">
+            <input required class="form-input block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6" type="text" id="name-signup">
+        </div>
       </div>
+
+      <div>
       <div class="form-group">
-        <label for="email-signup">email:</label>
-        <input class="form-input" type="text" id="email-signup" />
+        <label for="email-signup" class="block text-sm/6 font-medium text-gray-900">Email</label>
+        <div class="mt-2">
+            <input required class="form-input block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6" type="text" id="email-signup" />
+        </div>
       </div>
-      <div class="form-group">
-        <label for="password-signup">password:</label>
-        <input class="form-input" type="password" id="password-signup" />
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">signup</button>
+
+      <div>
+        <div class="form-group flex items-center justify-between">
+          <label for="password-signup" class="block text-sm/6 font-medium text-gray-900">Password</label>
+          <div class="mt-2"></div>
+          <input required class="form-input block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6" type="password" id="password-signup" />
+        </div>
+        <div class="form-group">
+         <button class="btn btn-primary flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" type="submit">signup</button>
+        </div>
       </div>
     </form>
   </div>
-</div>
 </body>
 </html>
 <script src="/js/signup.js"></script>

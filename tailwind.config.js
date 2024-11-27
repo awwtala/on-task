@@ -30,7 +30,7 @@ module.exports = {
       borderRadius: {
         '4xl': '2rem',
       }
-    }
+    },
   content: ["./public/**/*.{html,js}"],
   plugins: [require(`@tailwindcss/forms`)],
   }
